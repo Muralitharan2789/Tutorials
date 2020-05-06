@@ -1,0 +1,57 @@
+#Importing Required Libraries
+
+from pymongo import MongoClient 
+
+from bson import ObjectId  # This Library is used to handle ObjectId created during a inserting new data or record
+
+# creation of MongoClient 
+
+client=MongoClient() 
+  
+# Connect with the portnumber and host (Need an username and password to connect)
+
+client = MongoClient("mongodb://10.134.95.204:27017/") 
+
+# To list the database present the server
+
+client.list_database_names()
+
+# Access database 
+
+mydatabase = client['Analysis'] 
+
+#To list the Collections or Table present in the Database accessed
+
+mydatabase.list_collection_names()
+  
+# Access collection of the database 
+
+mycollection=mydatabase['responses'] 
+
+
+#Inserting a Document
+
+mydict = { "name": "John"}
+mycollection.insert_one(mydict) # or 
+mycollection.insert_one({ "name": "John"})
+
+
+#Delete Document
+
+mycollection.delete_one({'name':"John"})
+
+
+# Find or select data from a collection 
+
+mycollection.find_one({'name':"John"})
+
+# Update a record, or document
+
+mycollection.update_one({'name':"John"} {'$set': {'New_data': 'added'}}) # addding or set a record
+
+mycollection.update_one({'name':"John"}, {'$unset': {'New_data': 'added'}}) # Removing or unsetting a Record
+
+
+# Counting the number of Documents or records based on your Query
+
+mycollection.count({'name':"John"})
