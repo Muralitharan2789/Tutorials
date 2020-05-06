@@ -28,18 +28,15 @@ mydatabase.list_collection_names()
 
 mycollection=mydatabase['responses'] 
 
-
 #Inserting a Document
 
 mydict = { "name": "John"}
 mycollection.insert_one(mydict) # or 
 mycollection.insert_one({ "name": "John"})
 
-
 #Delete Document
 
 mycollection.delete_one({'name':"John"})
-
 
 # Find or select data from a collection 
 
@@ -50,7 +47,6 @@ mycollection.find_one({'name':"John"})
 mycollection.update_one({'name':"John"} {'$set': {'New_data': 'added'}}) # addding or set a record
 
 mycollection.update_one({'name':"John"}, {'$unset': {'New_data': 'added'}}) # Removing or unsetting a Record
-
 
 # Counting the number of Documents or records based on your Query
 
