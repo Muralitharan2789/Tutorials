@@ -73,7 +73,7 @@ Additional Commands used which will be useful while using linux while creating d
 systemctl start docker.service
 
 # to Remove the docker images with none tags (While creating repeated images on same name none tag image will be added)
-docker images | grep none | awk '{ print $3; }' | xargs docker rmi–f
+docker images | grep none | awk '{ print $3; }' | xargs docker rmi –f
 
 # xgboost will cause(You are running 32-bit Python on a 64-bit OS)  error, so we have to add the below installation to avoid the same
 RUN apt-get update && \
