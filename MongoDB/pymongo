@@ -41,6 +41,7 @@ mycollection.delete_one({'name':"John"})
 # Find or select data from a collection 
 
 mycollection.find_one({'name':"John"})
+mycollection.find_one({'Classifier': { "$regex": "^RandomForestClassifier" } }) #find using Regex Pattern
 
 # Update a record, or document
 
