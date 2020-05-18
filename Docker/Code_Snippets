@@ -67,7 +67,10 @@ docker network connect "network name" "container name"
 # To inspect the network for running containers inside network
 docker network inspect “network name"
 
-Additional Commands used which will be useful while using linux while creating docker image and connecting to network:
+# Firewall error with Docker 'No route to host' (Firewall Access Error)
+	firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 4 -i docker0 -j ACCEPT
+	firewall-cmd –reload
+	systemctl restart docker
 
 # To start Docker service in linux
 systemctl start docker.service
@@ -83,3 +86,13 @@ RUN apt-get update && \
 # To remove Contanier (First stop and then remove)
 docker stop “Conatiner name”
 docker container rm "Container Name"
+
+#Create a image or Container which two or more Python scripts to execute 
+There can be only one CMD in the docker file and if there is more, the last one overrides the others and takes effect. A key point of using docker might be to isolate your programs, so at first glance, you might want to move them to separate containers and talk to each other using a shared volume or a docker network.
+If you really need them to run in the same container, including them in a bash script and replacing the last CMD with CMD my_script.sh will run them alongside each other.
+# Create and save shell script (run.sh) file with executable files as below 
+	exec python /project/projectFiles/test1.py &
+	exec python /project/projectFiles/test2.py
+#Docker syntax for the shell script file
+	RUN chmod +x /project/projectFiles/run.sh
+	CMD /project/projectFiles/run.sh
