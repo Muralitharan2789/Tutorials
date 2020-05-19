@@ -96,3 +96,8 @@ If you really need them to run in the same container, including them in a bash s
 #Docker syntax for the shell script file
 	RUN chmod +x /project/projectFiles/run.sh
 	CMD /project/projectFiles/run.sh
+
+#Creating Binder Volume to save logs created while executing Python Code
+docker run -it -p 4000:4000 -v "/home/xxx/xxxx:/xxxx" --name=mongodb mongodb   #"hostname:pathname"
+
+
