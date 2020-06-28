@@ -1,4 +1,4 @@
-This file contains basics of below mentione topics:
+NLTK_Basics file contains basics of below mentione topics:
 1. NLP - Natural Language Processing
 2. Basic Tasks with Text
 3. Text Corpora
