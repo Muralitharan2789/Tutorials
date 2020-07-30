@@ -33,7 +33,7 @@ mean = total/n
 if n%2 == 0:
     median = (numbers[int(n/2)-1] + numbers[int(n/2)])/2
 else:
-    median = numbers[int((n+1)/2)]
+    median = numbers[int((n+1)/2)-1]
 #find mode
 freq = 0
 mode = 0
