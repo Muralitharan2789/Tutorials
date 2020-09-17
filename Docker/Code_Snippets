@@ -71,6 +71,15 @@ docker network inspect “network name"
 	firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 4 -i docker0 -j ACCEPT
 	firewall-cmd –reload
 	systemctl restart docker
+	
+	firewall-cmd --permanent --zone=trusted --change-interface=docker0
+	firewall-cmd --permanent --zone=trusted --add-port=4243/tcp
+	firewall-cmd --reload
+
+ 
+
+**Below command worked... It depends on the respective firewall config...
+sudo firewall-cmd --zone=public --add-port=12345/tcp --permanent
 
 # To start Docker service in linux
 systemctl start docker.service
