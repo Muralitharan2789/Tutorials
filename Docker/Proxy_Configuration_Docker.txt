@@ -1,0 +1,48 @@
+Configure proxy for yum
+
+https://www.linuxtechi.com/proxy-settings-yum-command-on-rhel-centos-servers/
+
+Edit /etc/yum.conf file...
+____________________________________
+
+Docker installation
+
+Uninstall old version
+
+$ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+				  
+____________________________________
+
+Setup yum repository
+
+$ sudo yum install -y yum-utils
+
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+	
+
+list available versions
+
+$ yum list docker-ce --showduplicates | sort -r
+
+install docker 
+
+$ sudo yum install docker-ce-19.03.9 docker-ce-cli-19.03.9 containerd.io
+
+$ sudo systemctl start docker
+
+____________________________________
+
+To enable  proxy for Docker 
+
+https://www.sbarjatiya.com/notes_wiki/index.php/HTTP_proxy_configuration_for_Docker_on_CentOS_7
+
+____________________________________
