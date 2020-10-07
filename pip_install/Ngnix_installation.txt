@@ -1,0 +1,147 @@
+Step 1: To add NGINX yum repository, create a file named /etc/yum.repos.d/nginx.repo and paste one of the configurations below:
+
+	[nginx]
+	name=nginx repo
+	baseurl=https://nginx.org/packages/centos/7/$basearch/
+	gpgcheck=0
+	enabled=1
+
+Step 2: sudo yum -y update # apt Package manager
+
+	sudo yum -y install nginx
+
+
+
+
+Step 3:
+	sudo systemctl start nginx
+	
+	sudo systemctl enable nginx
+
+Step 4: #Allow Fire wall
+
+	sudo firewall-cmd --zone=public --permanent --add-service=http
+	sudo firewall-cmd --zone=public --permanent --add-service=https
+	sudo firewall-cmd --reload
+
+Step 5: 
+      /etc/nginx.conf
+
+# have to paste(work) the below file
+worker_processes 4;
+
+      pid /var/run/nginx.pid;
+
+ 
+
+     
+ events {
+  
+            worker_connections 768;
+  
+	    # multi_accept on;
+
+	}
+http {
+        tcp_nodelay on;
+  
+	keepalive_timeout 65;
+  
+	types_hash_max_size 2048;
+  
+	large_client_header_buffers 6 32k;
+  
+	client_max_body_size 100m;
+  
+	include /etc/nginx/mime.types;
+  
+	default_type application/octet-stream;
+
+ 
+
+  
+	##
+  # Logging Settings
+  ##
+  
+	access_log /var/log/nginx/access.log;
+  
+	error_log /var/log/nginx/error.log warn;     
+
+    upstream backend {
+	server 10.169.48.89:8762;
+    }
+
+server {
+    listen       80;
+    server_name  localhost;
+
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+    location / {
+            proxy_pass http://backend;
+
+    	### Force timeouts if one of backend hosts is dead ###
+
+
+    	proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+
+ 
+
+
+
+    	### Set headers ###
+
+    	proxy_set_header  X-Real-IP $remote_addr;
+
+    	proxy_set_header  Accept-Encoding "";
+
+    	proxy_set_header Host $http_host;
+
+
+
+    	### Don't timeout waiting for long queries - timeout is 1 hr ###
+
+    	proxy_read_timeout       3600;
+
+   	 proxy_set_header     X-Forwarded-Proto $scheme;
+
+
+
+
+    		### By default we don't want to redirect ###
+
+    	proxy_redirect            off;
+
+ 
+
+
+    	proxy_buffer_size         128k;
+
+    	proxy_buffers             4 256k;
+
+    	proxy_busy_buffers_size   256k;
+
+        }
+}
+}
+
+Step 6: sudo semanage permissive -a httpd_t
+	#Check the se linux staus - sestatus
+
+https://www.nginx.com/nginx-wiki/build/dirhtml/start/topics/tutorials/install/
+
+https://phoenixnap.com/kb/how-to-install-nginx-on-centos-7
+
+
+https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/
+
+
