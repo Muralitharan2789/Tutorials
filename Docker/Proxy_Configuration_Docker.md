@@ -56,4 +56,32 @@ ____________________________________
 
 Refer link: https://www.sbarjatiya.com/notes_wiki/index.php/HTTP_proxy_configuration_for_Docker_on_CentOS_7
 
+1. Create folder for configuring docker service through systemd
+mkdir /etc/systemd/system/docker.service.d
+
+2. Create service configuration file at /etc/systemd/system/docker.service.d/http-proxy.conf
+
+ cd /etc/systemd/system/docker.service.d
+
+ vi http-proxy.conf
+
+ Add the below data in the http-proxy.conf file as per your requirements
+ '''
+ [Service]
+
+ Environment="HTTP_PROXY=http://proxy.iiit.ac.in:8080/" "NO_PROXY=localhost,127.0.0.0/8,10.0.0.0/8,192.168.0.0/16,172.16.0.0/12"
+ '''
+
+3. Reload systemctl so that new settings are read
+
+sudo systemctl daemon-reload
+
+4. Verify that docker service Environment is properly set
+
+sudo systemctl show docker --property Environment
+
+5. Restart docker service so that it uses updated Environment settings
+
+sudo systemctl restart docker
+
 ____________________________________
