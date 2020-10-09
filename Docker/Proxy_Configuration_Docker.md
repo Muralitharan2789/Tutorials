@@ -69,6 +69,7 @@ mkdir /etc/systemd/system/docker.service.d
  vi http-proxy.conf
 
  Add the below data in the http-proxy.conf file as per your requirements
+ 
  '''
  
  [Service]
