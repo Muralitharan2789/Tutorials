@@ -7,12 +7,15 @@ Refer link: https://www.linuxtechi.com/proxy-settings-yum-command-on-rhel-centos
 vi /etc/yum.conf
 
 Add the below proxy in the conf file
+
 '''
+
 proxy=http://xx.xxx.xx.xx:xxxx
 
 proxy_username=yyyyyy
 
 proxy_password=zzzzz
+
 '''
 ____________________________________
 
@@ -67,9 +70,11 @@ mkdir /etc/systemd/system/docker.service.d
 
  Add the below data in the http-proxy.conf file as per your requirements
  '''
+ 
  [Service]
 
  Environment="HTTP_PROXY=http://proxy.iiit.ac.in:8080/" "NO_PROXY=localhost,127.0.0.0/8,10.0.0.0/8,192.168.0.0/16,172.16.0.0/12"
+ 
  '''
 
 3. Reload systemctl so that new settings are read
