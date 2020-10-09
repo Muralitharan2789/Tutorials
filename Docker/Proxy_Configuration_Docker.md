@@ -9,7 +9,9 @@ vi /etc/yum.conf
 Add the below proxy in the conf file
 '''
 proxy=http://xx.xxx.xx.xx:xxxx
+
 proxy_username=yyyyyy
+
 proxy_password=zzzzz
 '''
 ____________________________________
