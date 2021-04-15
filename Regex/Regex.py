@@ -75,4 +75,6 @@ re.findall('\w+@\w+\.\w{2,3}',text3)
 
 
 
-
+#Search and replace special characters and spaces with '_' and capitalize each word
+string='(Re) Ordering/Monitoring'
+'_'.join([i.upper() for i in re.split(r'[`\-=~!@#$%^&*()_+\[\]{};\'\\:"|<,./<>?\s]', string) if i])
