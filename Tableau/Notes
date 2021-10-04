@@ -1,0 +1,27 @@
+Top N within a category
+https://kb.tableau.com/articles/HowTo/finding-the-top-n-within-a-category
+Comparison between two days
+https://community.tableau.com/s/question/0D54T00000C6cgoSAB/today-and-yesterday-data-with-comparison
+Table Calculation Functions
+https://help.tableau.com/current/pro/desktop/en-gb/functions_functions_tablecalculation.htm
+
+Other Measure's and Dimensions
+	- Date as Exact date - need to change date to Discrete from Continuous
+	
+Formulae's 
+	1. if [Date] = today() then "Today" 
+     else "Not Today" 
+      End
+	2. CASE [Action] 
+      WHEN 0 THEN 'A'
+      WHEN 1 THEN 'B'
+      ELSE 'Not Defined' END
+	3. Column Split with Calculated Fields - different examples
+		a.  lower(right([columnName],len([columnName])-find([columnName],'/')))
+		b.  right([columnName],len([columnName])-find([columnName],'/'))
+		c.  lower(left([columnName],find([columnName],'/')-1))
+	4. Getting data after particular text:
+		a. trim(right((right([Details],len([Details])-find([Details],'Comment:')+1)), 
+       len((right([Details],len([Details])-find([Details],'Comment:')+1))) 
+       - find((right([Details],len([Details])-find([Details],'Comment:')+1)),' ')))
+  5.
