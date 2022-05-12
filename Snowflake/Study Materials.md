@@ -1,0 +1,49 @@
+- **Creating a table from the other table data:**
+ 
+ CREATE OR REPLACE TABLE NATION 
+ AS 
+ (SELECT * FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF100"."NATION")
+ 
+- **Getting the DDL Data**
+
+SELECT GET_DDL('TABLE','NATION')
+
+- **Getting the Columns from the table**
+
+SELECT COLUMN_NAME FROM CITIBIKE.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'NATION'
+
+- **Creating a Stored Procedure using Java language**
+
+Reference link:https://interworks.com/blog/2020/02/18/zero-to-snowflake-simple-sql-stored-procedures/
+
+CREATE OR REPLACE PROCEDURE NATION_PROCEDURE()
+
+  RETURNS STRING
+  
+  LANGUAGE JAVASCRIPT
+  
+  AS     
+  
+  $$  
+  
+VAR SQL_COMMAND= `INSERT OVERWRITE INTO "CITICAR"."PUBLIC"."NATION" 
+
+("N_NATIONKEY","N_NAME","N_REGIONKEY","N_COMMENT")
+
+SELECT
+
+N_NATIONKEY,N_NAME,N_REGIONKEY,N_COMMENT
+
+FROM "CITIBIKE"."PUBLIC"."NATION";`
+
+VAR SNAPSHOT_STATEMENT = SNOWFLAKE.CREATESTATEMENT({SQLTEXT:SQL_COMMAND});
+
+VAR SNAPSHOT_RESULTS = SNAPSHOT_STATEMENT.EXECUTE();
+
+RETURN TRUE;
+
+$$;
+
+
+ 
+ 
